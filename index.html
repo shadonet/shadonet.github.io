@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prosper Doko — DevOps &amp; AI Engineer</title>
+<meta name="description" content="Technical portfolio of Prosper Doko — DevOps, Cloud, Backend and Generative AI.">
+<link rel="canonical" href="https://shadonet.github.io/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0A0E13;
+    --bg-panel: #10161D;
+    --bg-panel-raised: #141B23;
+    --ink: #EFEBE2;
+    --muted: #8B98A3;
+    --muted-dim: #707C86;
+    --signal: #FF8A44;
+    --signal-dim: #6b4327;
+    --wave: #3FDCC3;
+    --wave-dim: #1f4d47;
+    --line: rgba(239,235,226,0.10);
+    --line-strong: rgba(239,235,226,0.18);
+    --radius: 3px;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  ::selection{ background: var(--signal); color: #14100b; }
+
+  .skip-link{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+    padding: 10px 14px;
+    background: var(--wave);
+    color: #07120f;
+    font-family: var(--mono);
+    font-size: 13px;
+    transform: translateY(-160%);
+    transition: transform .15s ease;
+  }
+  .skip-link:focus{ transform: translateY(0); }
+
+  :focus-visible{
+    outline: 2px solid var(--wave);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* subtle background grid, like a rack schematic */
+  .bg-grid{
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 0%, black 10%, transparent 70%);
+            mask-image: radial-gradient(ellipse 70% 50% at 50% 0%, black 10%, transparent 70%);
+    opacity: 0.5;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10,14,19,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .brand{
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .brand .dot{
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 0 3px var(--signal-dim);
+    flex-shrink: 0;
+  }
+  .nav-links{
+    display: flex;
+    gap: 28px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .nav-links a{ transition: color .15s ease; }
+  .nav-links a:hover{ color: var(--ink); }
+  @media (max-width: 720px){
+    .nav-links{ display: none; }
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding: 92px 0 64px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-grid{
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+  }
+  @media (max-width: 880px){
+    .hero-grid{ grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.10em;
+    color: var(--wave);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before{
+    content: "";
+    display: inline-block;
+    width: 18px; height: 1px;
+    background: var(--wave);
+  }
+
+  h1{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(32px, 4.6vw, 50px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin-bottom: 22px;
+  }
+  h1 em{
+    font-style: normal;
+    color: var(--signal);
+  }
+
+  .lede{
+    font-size: 16.5px;
+    color: var(--muted);
+    max-width: 46ch;
+    margin-bottom: 34px;
+  }
+
+  .cta-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn{
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    padding: 12px 18px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line-strong);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color .15s ease, background .15s ease, transform .1s ease;
+  }
+  .btn:hover{ border-color: var(--muted); transform: translateY(-1px); }
+  .btn.primary{
+    background: var(--signal);
+    color: #16110B;
+    border-color: var(--signal);
+    font-weight: 500;
+  }
+  .btn.primary:hover{ background: #ff9958; border-color: #ff9958; }
+
+  /* ---------- TECH TERMINAL (hero panel) ---------- */
+  .terminal-card{
+    background: linear-gradient(180deg, rgba(16,22,29,0.98), rgba(10,14,19,0.96));
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,.28);
+  }
+  .terminal-top{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.02);
+  }
+  .terminal-top span{
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.20);
+    flex-shrink: 0;
+  }
+  .terminal-top code{ margin-left: 6px; }
+  .terminal-card pre{
+    margin: 0;
+    padding: 26px 26px 28px;
+    overflow: auto;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: #DDF5EF;
+    white-space: pre-wrap;
+  }
+  .terminal-card .muted{ color: var(--muted-dim); }
+  .terminal-card .accent{ color: var(--wave); }
+  .terminal-card .signal{ color: var(--signal); }
+
+  /* ---------- STATS ---------- */
+  section.stats{
+    border-bottom: 1px solid var(--line);
+  }
+  .stats-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 40px 0;
+  }
+  .stats-grid > div{
+    padding: 0 24px;
+    border-left: 1px solid var(--line);
+  }
+  .stats-grid > div:first-child{ border-left: none; padding-left: 0; }
+  .stat-num{
+    font-family: var(--display);
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .stat-num span{ color: var(--wave); }
+  .stat-label{
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+  }
+  @media (max-width: 780px){
+    .stats-grid{ grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
+    .stats-grid > div:nth-child(3){ border-left: none; padding-left: 0; }
+  }
+  @media (max-width: 520px){
+    .wrap{ padding: 0 20px; }
+    .stats-grid{ grid-template-columns: 1fr; }
+    .stats-grid > div{
+      border-left: none;
+      padding: 0;
+    }
+    .contact-list a{ gap: 12px; }
+    .contact-list a .arrow{
+      overflow-wrap: anywhere;
+      text-align: right;
+    }
+  }
+
+  /* ---------- SECTION HEADS ---------- */
+  section{ padding: 76px 0; border-bottom: 1px solid var(--line); }
+  .section-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 40px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .section-head h2{
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 600;
+  }
+  .section-num{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted-dim);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .projects{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  @media (max-width: 780px){ .projects{ grid-template-columns: 1fr; } }
+
+  .project{
+    background: var(--bg);
+    padding: 30px 28px;
+    transition: background .15s ease;
+  }
+  .project:hover{ background: var(--bg-panel); }
+  .project-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    gap: 12px;
+  }
+  .project h3{
+    font-family: var(--display);
+    font-size: 18.5px;
+    font-weight: 600;
+  }
+  .status{
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .status.live{ color: var(--wave); background: rgba(63,220,195,0.09); border: 1px solid var(--wave-dim); }
+  .status.award{ color: var(--signal); background: rgba(255,138,68,0.09); border: 1px solid var(--signal-dim); }
+
+  .project p{
+    color: var(--muted);
+    font-size: 14.5px;
+    margin-bottom: 18px;
+  }
+  .tags{ display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag{
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    padding: 3px 8px;
+  }
+
+
+  .project-role{
+    font-family: var(--mono);
+    font-size: 10.5px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--wave);
+    margin: -4px 0 14px;
+  }
+  .project-links{
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .project-link{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 2px;
+  }
+  .project-link:hover{ color: var(--wave); border-color: var(--wave); }
+  .proof-line{
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--muted-dim);
+  }
+
+  .other-work{
+    margin-top: 28px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+  }
+  .other-work-head{ margin-bottom: 14px; }
+  .other-work-item{
+    display: grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap: 32px;
+    align-items: center;
+    padding: 22px 0 4px;
+  }
+  .other-work-item h3{
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+  .other-work-item p{
+    color: var(--muted);
+    font-size: 13.5px;
+    max-width: 72ch;
+  }
+  .other-work-item .tags{ justify-content: flex-end; }
+  @media (max-width: 780px){
+    .other-work-item{ grid-template-columns: 1fr; gap: 12px; }
+    .other-work-item .tags{ justify-content: flex-start; }
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  @media (max-width: 980px){ .skills-grid{ grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px){ .skills-grid{ grid-template-columns: 1fr; } }
+
+  .skill-col{
+    background: var(--bg);
+    padding: 22px 20px;
+  }
+  .skill-col .label{
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .skill-col .label::before{
+    content: "";
+    width: 6px; height: 6px;
+    background: var(--signal);
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .skill-col ul{ list-style: none; }
+  .skill-col li{
+    font-size: 13.5px;
+    color: var(--ink);
+    padding: 5px 0;
+    border-top: 1px dashed var(--line);
+  }
+  .skill-col li:first-child{ border-top: none; }
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{ position: relative; }
+  .tl-item{
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .tl-item:first-child{ border-top: none; }
+  @media (max-width: 620px){
+    .tl-item{ grid-template-columns: 1fr; gap: 6px; }
+  }
+  .tl-date{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted-dim);
+    padding-top: 2px;
+  }
+  .tl-role{ font-family: var(--display); font-weight: 600; font-size: 16px; margin-bottom: 3px; }
+  .tl-org{ font-size: 13.5px; color: var(--wave); margin-bottom: 8px; }
+  .tl-desc{ font-size: 13.5px; color: var(--muted); max-width: 62ch; }
+
+  .creds{
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 720px){ .creds{ grid-template-columns: 1fr; } }
+  .creds .label{
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--muted-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .creds .val{ font-size: 14px; }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{ padding: 76px 0 48px; }
+  .contact-top{
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 780px){ .contact-top{ grid-template-columns: 1fr; } }
+  footer h2{
+    font-family: var(--display);
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 18px;
+  }
+  footer .lede{ margin-bottom: 0; }
+  .contact-list{ display: flex; flex-direction: column; gap: 4px; }
+  .contact-list a{
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--ink);
+    transition: color .15s ease, padding-left .15s ease;
+  }
+  .contact-list a:first-child{ border-top: none; }
+  .contact-list a:hover{ color: var(--wave); padding-left: 6px; }
+  .contact-list a span.arrow{ color: var(--muted-dim); }
+
+  .foot-meta{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--muted-dim);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+
+  /* ---------- LANGUAGE SWITCHER ---------- */
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:22px;
+  }
+  .lang-switch{
+    display:flex;
+    align-items:center;
+    gap:2px;
+    padding:3px;
+    border:1px solid var(--line-strong);
+    border-radius:5px;
+    background:rgba(255,255,255,0.02);
+  }
+  .lang-btn{
+    appearance:none;
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.06em;
+    padding:6px 8px;
+    border-radius:3px;
+    cursor:pointer;
+  }
+  .lang-btn:hover{ color:var(--ink); }
+  .lang-btn.active{
+    color:#16110B;
+    background:var(--wave);
+  }
+  @media (max-width: 720px){
+    .nav-right{ gap:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *, *::before, *::after{
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Aller au contenu / Skip to content</a>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<nav aria-label="Navigation principale / Primary navigation">
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="dot"></span>PROSPER&nbsp;DOKO</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#projets" data-i18n="nav.projects">Projets</a>
+        <a href="#competences" data-i18n="nav.skills">Compétences</a>
+        <a href="#experience" data-i18n="nav.experience">Expérience</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+      </div>
+      <div class="lang-switch" role="group" aria-label="Sélecteur de langue / Language selector">
+        <button class="lang-btn" type="button" data-lang="fr" aria-label="Français">FR</button>
+        <button class="lang-btn" type="button" data-lang="en" aria-label="English">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow" data-i18n="hero.eyebrow">Ingénieur DevOps &amp; IA — Cloud · Backend · GenAI</div>
+      <h1 data-i18n-html="hero.title">De l'infrastructure <em>cloud</em><br>à l'agent <em>IA</em>.</h1>
+      <p class="lede" data-i18n="hero.lede">Je conçois, déploie et exploite des systèmes cloud et des applications IA en production — infrastructure AWS, CI/CD, APIs, microservices et agents intelligents. Mon expertise Voice AI et télécom complète ce socle avec des systèmes temps réel accessibles par téléphone.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#projets" data-i18n="hero.projectsCta">Voir les projets →</a>
+        <a class="btn" data-cv-download href="assets/Prosper_Doko_DevOps_AI_Engineer_CV_FR.pdf" download data-i18n="hero.cvCta">Télécharger mon CV ↓</a>
+        <a class="btn" href="https://github.com/shadonet" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://linkedin.com/in/prosper-doko" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:ingprs01@gmail.com">Email</a>
+      </div>
+      <div class="project-role" style="margin-top:20px" data-i18n="hero.relocation">Disponible pour une relocalisation à Abidjan, Côte d’Ivoire</div>
+    </div>
+
+    <div class="terminal-card" aria-label="Aperçu technique / Technical snapshot">
+      <div class="terminal-top">
+        <span></span><span></span><span></span>
+        <code data-i18n="console.prompt">prosper@portfolio:~$</code>
+      </div>
+      <pre><code><span class="muted">$</span> whoami
+<span data-i18n="console.whoami">Ingénieur DevOps &amp; IA</span>
+
+<span class="muted">$</span> focus
+<span data-i18n="console.focus1">Infrastructure cloud</span>
+<span data-i18n="console.focus2">CI/CD &amp; automatisation</span>
+<span data-i18n="console.focus3">Backend &amp; APIs</span>
+<span data-i18n="console.focus4">IA générative</span>
+<span data-i18n="console.focus5">Voice AI</span>
+
+<span class="muted">$</span> stack --core
+<span data-i18n="console.stack1">AWS · Linux · Docker</span>
+<span data-i18n="console.stack2">Kubernetes · Python</span>
+<span data-i18n="console.stack3">FastAPI · Node.js</span>
+<span data-i18n="console.stack4">GitHub Actions · Redis</span>
+
+<span class="muted">$</span> ai --providers
+<span data-i18n="console.ai1">OpenAI · Claude</span>
+<span data-i18n="console.ai2">Gemini · Grok</span></code></pre>
+    </div>
+  </div>
+</header>
+
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div>
+      <div class="stat-num"><span>7+</span></div>
+      <div class="stat-label" data-i18n-html="stats.experience">ANS D'EXPÉRIENCE<br>DÉVELOPPEMENT &amp; DEVOPS</div>
+    </div>
+    <div>
+      <div class="stat-num"><span>−50%</span></div>
+      <div class="stat-label" data-i18n-html="stats.deployment">TEMPS DE DÉPLOIEMENT<br>APRÈS AUTOMATISATION CI/CD</div>
+    </div>
+    <div>
+      <div class="stat-num" data-i18n-html="stats.prizeNum">1<span>er</span> PRIX</div>
+      <div class="stat-label">HACK4DEMOCRACY 2025<br>CALLBOT CITOYEN</div>
+    </div>
+    <div>
+      <div class="stat-num"><span>KCNA</span></div>
+      <div class="stat-label">KUBERNETES &amp; CLOUD NATIVE<br>THE LINUX FOUNDATION</div>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-i18n="projects.heading">Réalisations sélectionnées</h2>
+      <span class="section-num" data-i18n="projects.sectionNum">01 / PREUVES TECHNIQUES</span>
+    </div>
+
+    <div class="projects">
+      <div class="project">
+        <div class="project-top">
+          <h3>OurVoice &amp; OVIA</h3>
+          <span class="status live" data-i18n="status.production">Production</span>
+        </div>
+        <div class="project-role" data-i18n="projects.ourvoice.role">Mon rôle — Architecture · Backend · DevOps · Intégration IA</div>
+        <p data-i18n="projects.ourvoice.desc">Plateforme CPaaS et Voice AI combinant téléphonie, SMS, IVR, APIs, microservices et agents vocaux IA. J'interviens sur l'architecture, les services backend, les pipelines de déploiement, les intégrations temps réel et l'exploitation des environnements de production.</p>
+        <div class="tags">
+          <span class="tag">Python / FastAPI</span><span class="tag">Node.js</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span><span class="tag">Redis</span><span class="tag">Linux</span><span class="tag">Voice AI</span>
+        </div>
+        <div class="proof-line" data-i18n="projects.ourvoice.proof">CI/CD automatisé · webhooks &amp; queues · LLM + STT + TTS · services Linux en production</div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <h3>CallBot Citoyen</h3>
+          <span class="status award" data-i18n="status.firstPrize">1er prix</span>
+        </div>
+        <div class="project-role" data-i18n="projects.callbot.role">Mon rôle — Conception · Architecture · Voice AI · Déploiement</div>
+        <p data-i18n="projects.callbot.desc">Agent vocal IA multilingue accessible par simple appel téléphonique, permettant aux citoyens d'accéder à des informations publiques par la voix — sans smartphone ni interface web. Lauréat du Hack4Democracy 2025 de la Digital Democracy Initiative.</p>
+        <div class="tags">
+          <span class="tag" data-i18n="tag.telephony">Téléphonie</span><span class="tag">ASR / TTS</span><span class="tag" data-i18n="tag.aiAgent">Agent IA</span><span class="tag">RAG</span><span class="tag">API backend</span>
+        </div>
+        <div class="project-links">
+          <a class="project-link" href="https://callbot.bj" target="_blank" rel="noopener" data-i18n="projects.view">Voir le projet ↗</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <h3>Cashew Barometer</h3>
+          <span class="status live" data-i18n="status.dataPlatform">Data platform</span>
+        </div>
+        <div class="project-role" data-i18n="projects.cashew.role">Mon rôle — Full Stack · Data Visualization · Mobile</div>
+        <p data-i18n="projects.cashew.desc">Contribution à une plateforme de market intelligence dédiée à la filière cajou : ajout et optimisation de dashboards de production et de commerce, visualisations responsives avec ApexCharts, amélioration des performances de chargement et accompagnement de la distribution mobile sur iOS/TestFlight et Android/Play Store.</p>
+        <div class="tags">
+          <span class="tag">ApexCharts</span><span class="tag">Data Visualization</span><span class="tag">Web</span><span class="tag">Mobile</span><span class="tag">TestFlight</span><span class="tag">Play Store</span>
+        </div>
+        <div class="project-links">
+          <a class="project-link" href="https://cashewbarometer.com/" target="_blank" rel="noopener" data-i18n="projects.view">Voir le projet ↗</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <h3 data-i18n="projects.security.title">Infrastructure de production &amp; sécurité</h3>
+          <span class="status live">DevSecOps</span>
+        </div>
+        <div class="project-role" data-i18n="projects.security.role">Mon rôle — Hardening · Accès · Audit · Secrets · Monitoring</div>
+        <p data-i18n="projects.security.desc">Préparation de serveurs de production à un audit externe : durcissement Linux, contrôle des accès, journalisation d'audit, restrictions réseau, gestion des secrets et procédures d'export sécurisées.</p>
+        <div class="tags">
+          <span class="tag">Linux</span><span class="tag">Tailscale</span><span class="tag">auditd</span><span class="tag">ACL</span><span class="tag">Secrets</span><span class="tag">Monitoring</span>
+        </div>
+        <div class="proof-line" data-i18n="projects.security.proof">Objectif : environnements auditables, accès privilégiés contrôlés et meilleure traçabilité opérationnelle</div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <h3>TendersLeads</h3>
+          <span class="status live">SaaS</span>
+        </div>
+        <div class="project-role" data-i18n="projects.tenders.role">Mon rôle — Product Engineering · Backend · APIs · Automation</div>
+        <p data-i18n="projects.tenders.desc">Plateforme SaaS de veille sur les appels d'offres publics, avec préférences utilisateurs, authentification, traitement automatisé des données et notifications ciblées selon les secteurs et marchés suivis.</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">REST APIs</span><span class="tag">Automation</span><span class="tag">SaaS</span>
+        </div>
+        <div class="project-links">
+          <a class="project-link" href="https://tendersleads.com" target="_blank" rel="noopener" data-i18n="projects.view">Voir le projet ↗</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <h3>DIGIKIOSQUES</h3>
+          <span class="status live" data-i18n="status.architecture">Architecture</span>
+        </div>
+        <div class="project-role" data-i18n="projects.digikiosques.role">Mon rôle — Architecture de solutions · C4 · Flux de données</div>
+        <p data-i18n="projects.digikiosques.desc">Architecture IT pour un réseau de kiosques numériques solaires desservant des petits exploitants agricoles en zone rurale. Modélisation C4, architecture edge/pays/central, flux de données et processus métier.</p>
+        <div class="tags">
+          <span class="tag">Edge architecture</span><span class="tag">C4</span><span class="tag">Data flows</span><span class="tag">Rural tech</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="other-work">
+      <div class="other-work-head">
+        <span class="section-num" data-i18n="other.heading">AUTRES RÉALISATIONS</span>
+      </div>
+      <div class="other-work-item">
+        <div>
+          <h3 data-i18n="projects.grievance.title">Système de gestion des plaintes</h3>
+          <p data-i18n="projects.grievance.desc">Déploiement d'un système de gestion des plaintes dans les communes de Matéri et Banikoara, avec fonctionnement en français et langues locales, plans de test, validation et accompagnement opérationnel.</p>
+        </div>
+        <div class="tags">
+          <span class="tag">Laravel</span><span class="tag" data-i18n="tag.multilingual">Multilingue</span><span class="tag">Testing</span><span class="tag" data-i18n="tag.fieldDeployment">Déploiement terrain</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-i18n="skills.heading">Compétences techniques</h2>
+      <span class="section-num" data-i18n="skills.sectionNum">02 / STACK &amp; PLATEFORME</span>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-col">
+        <div class="label">Cloud &amp; DevOps</div>
+        <ul>
+          <li>AWS — EC2, S3, Lambda, RDS, IAM, VPC, CloudWatch</li>
+          <li>Docker</li>
+          <li>Kubernetes (KCNA)</li>
+          <li>GitHub Actions / CI-CD</li>
+          <li>Linux, Nginx, Bash</li>
+          <li data-i18n="skills.monitoring">Monitoring &amp; gestion des secrets</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <div class="label" data-i18n="skills.genai">IA générative</div>
+        <ul>
+          <li>OpenAI, Gemini, Claude, Grok</li>
+          <li data-i18n="skills.aiAgents">Agents IA</li>
+          <li>RAG</li>
+          <li>Prompt engineering</li>
+          <li>ASR, TTS, NLP</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <div class="label">Backend &amp; APIs</div>
+        <ul>
+          <li>Python / FastAPI</li>
+          <li>Node.js / Express</li>
+          <li>TypeScript</li>
+          <li>PHP / Laravel</li>
+          <li>REST, webhooks, microservices</li>
+          <li data-i18n="skills.queues">Queues &amp; traitements asynchrones</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <div class="label" data-i18n="skills.voice">Voix &amp; Télécom</div>
+        <ul>
+          <li>Asterisk, FreePBX, ARI</li>
+          <li>SIP trunking</li>
+          <li>WebRTC, LiveKit</li>
+          <li>IVR</li>
+          <li>SMS / OTP / SMPP</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <div class="label" data-i18n="skills.data">Données</div>
+        <ul>
+          <li>PostgreSQL</li>
+          <li>MySQL</li>
+          <li>Redis</li>
+          <li data-i18n="skills.messageQueues">Files de messages</li>
+          <li data-i18n="skills.async">Traitement asynchrone</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-i18n="experience.heading">Expérience</h2>
+      <span class="section-num" data-i18n="experience.sectionNum">03 / PARCOURS</span>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date" data-i18n="experience.presentDate">2023 — présent</div>
+        <div>
+          <div class="tl-role" data-i18n="experience.ourvoice.role">Développeur Full Stack &amp; Architecte de solutions</div>
+          <div class="tl-org">OurVoice SARL · Cotonou, Bénin</div>
+          <div class="tl-desc" data-i18n="experience.ourvoice.desc">Architecture, développement et exploitation de plateformes cloud d'IA et de communication. APIs REST et microservices Python/FastAPI et Node.js/Express, Docker/CI-CD, webhooks, queues et intégration IA générative (LLM, RAG, ASR, TTS). Encadrement d'une équipe de 5 ingénieurs.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2022</div>
+        <div>
+          <div class="tl-role" data-i18n="experience.tic.role">Responsable informatique</div>
+          <div class="tl-org">TIC Agro Business Center · Bénin</div>
+          <div class="tl-desc" data-i18n="experience.tic.desc">Encadrement d'une équipe de 7 développeurs, adoption Agile/Scrum (+25% de productivité). Déploiement et administration de l'infrastructure AWS (EC2, S3, Lambda, RDS, IAM, VPC, CloudWatch).</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2019 — 2022</div>
+        <div>
+          <div class="tl-role" data-i18n="experience.fullstack">Développeur Full Stack</div>
+          <div class="tl-org" data-i18n="experience.gversion.org">GVersion Ltd · Royaume-Uni (à distance)</div>
+          <div class="tl-desc" data-i18n="experience.gversion.desc">APIs REST et services backend pour une plateforme de gestion de clés immobilières. Conception et optimisation d'un tableau de bord Vue.js.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2017 — 2019</div>
+        <div>
+          <div class="tl-role" data-i18n="experience.fullstack">Développeur Full Stack</div>
+          <div class="tl-org">Nautilus Technology · Bénin</div>
+          <div class="tl-desc" data-i18n="experience.nautilus.desc">Développement de plateformes web et mobiles B2B avec PHP et Laravel. Conception et maintenance d'APIs REST.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="creds">
+      <div>
+        <div class="label" data-i18n="credentials.education">Formation</div>
+        <div class="val" data-i18n="credentials.degree">Diplôme d'ingénieur en informatique — École Polytechnique d'Abomey-Calavi, Bénin (2014–2016)</div>
+      </div>
+      <div>
+        <div class="label" data-i18n="credentials.certification">Certification</div>
+        <div class="val" data-i18n="credentials.kcna">Kubernetes and Cloud Native Associate (KCNA) — The Linux Foundation, août 2025</div>
+      </div>
+      <div>
+        <div class="label" data-i18n="credentials.languages">Langues</div>
+        <div class="val" data-i18n="credentials.languagesValue">Français — C1 / courant · Anglais — B2 / professionnel</div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-top">
+      <div>
+        <h2 data-i18n="contact.heading">Discutons de votre projet.</h2>
+        <p class="lede" data-i18n="contact.lede">Basé à Cotonou, Bénin — ouvert aux opportunités et à la relocalisation en Afrique francophone, notamment à Abidjan.</p>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:ingprs01@gmail.com">Email <span class="arrow">ingprs01@gmail.com →</span></a>
+        <a href="https://linkedin.com/in/prosper-doko" target="_blank" rel="noopener">LinkedIn <span class="arrow">/in/prosper-doko →</span></a>
+        <a href="https://github.com/shadonet" target="_blank" rel="noopener">GitHub <span class="arrow">/shadonet →</span></a>
+        <a data-cv-download href="assets/Prosper_Doko_DevOps_AI_Engineer_CV_FR.pdf" download><span data-i18n="contact.cv">Télécharger mon CV</span> <span class="arrow">PDF ↓</span></a>
+      </div>
+    </div>
+    <div class="foot-meta">
+      <span data-i18n="footer.role">PROSPER DOKO — INGÉNIEUR DEVOPS &amp; IA</span>
+      <span data-i18n="footer.location">COTONOU, BÉNIN</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const translations = {"fr":{"meta.title":"Prosper Doko — Ingénieur DevOps & IA | Cloud, Backend & GenAI","meta.description":"Portfolio technique de Prosper Doko, Ingénieur DevOps & IA : AWS, CI/CD, Python, APIs, microservices, IA générative et Voice AI.","nav.projects":"Projets","nav.skills":"Compétences","nav.experience":"Expérience","nav.contact":"Contact","hero.eyebrow":"Ingénieur DevOps & IA — Cloud · Backend · GenAI","hero.title":"De l'infrastructure <em>cloud</em><br>à l'agent <em>IA</em>.","hero.lede":"Je conçois, déploie et exploite des systèmes cloud et des applications IA en production — infrastructure AWS, CI/CD, APIs, microservices et agents intelligents. Mon expertise Voice AI et télécom complète ce socle avec des systèmes temps réel accessibles par téléphone.","hero.projectsCta":"Voir les projets →","hero.cvCta":"Télécharger mon CV ↓","hero.relocation":"Disponible pour une relocalisation à Abidjan, Côte d’Ivoire","console.prompt":"prosper@portfolio:~$","console.whoami":"Ingénieur DevOps & IA","console.focus1":"Infrastructure cloud","console.focus2":"CI/CD & automatisation","console.focus3":"Backend & APIs","console.focus4":"IA générative","console.focus5":"Voice AI","console.stack1":"AWS · Linux · Docker","console.stack2":"Kubernetes · Python","console.stack3":"FastAPI · Node.js","console.stack4":"GitHub Actions · Redis","console.ai1":"OpenAI · Claude","console.ai2":"Gemini · Grok","diagram.trace":"trace production — pipeline voice ai","diagram.live":"live","diagram.aria":"Schéma d'un appel téléphonique routé vers un agent vocal IA, montrant l'échange de signalisation SIP puis la génération de la réponse par IA.","diagram.phone":"TÉLÉPHONE","diagram.server":"SERVEUR OURVOICE","diagram.agent":"AGENT IA","diagram.invite":"INVITE — appel entrant","diagram.rtpIn":"RTP — flux audio","diagram.context":"transcription + contexte","diagram.response":"réponse générée (TTS)","diagram.rtpOut":"RTP — réponse vocale","stats.experience":"ANS D'EXPÉRIENCE<br>DÉVELOPPEMENT &amp; DEVOPS","stats.deployment":"TEMPS DE DÉPLOIEMENT<br>APRÈS AUTOMATISATION CI/CD","stats.prizeNum":"1<span>er</span> PRIX","projects.heading":"Réalisations sélectionnées","projects.sectionNum":"01 / PREUVES TECHNIQUES","projects.view":"Voir le projet ↗","status.production":"Production","status.firstPrize":"1er prix","status.architecture":"Architecture","status.deployed":"Déployé","projects.ourvoice.role":"Mon rôle — Architecture · Backend · DevOps · Intégration IA","projects.ourvoice.desc":"Plateforme CPaaS et Voice AI combinant téléphonie, SMS, IVR, APIs, microservices et agents vocaux IA. J'interviens sur l'architecture, les services backend, les pipelines de déploiement, les intégrations temps réel et l'exploitation des environnements de production.","projects.ourvoice.proof":"CI/CD automatisé · webhooks & queues · LLM + STT + TTS · services Linux en production","projects.callbot.role":"Mon rôle — Conception · Architecture · Voice AI · Déploiement","projects.callbot.desc":"Agent vocal IA multilingue accessible par simple appel téléphonique, permettant aux citoyens d'accéder à des informations publiques par la voix — sans smartphone ni interface web. Lauréat du Hack4Democracy 2025 de la Digital Democracy Initiative.","projects.security.title":"Infrastructure de production & sécurité","projects.security.role":"Mon rôle — Hardening · Accès · Audit · Secrets · Monitoring","projects.security.desc":"Préparation de serveurs de production à un audit externe : durcissement Linux, contrôle des accès, journalisation d'audit, restrictions réseau, gestion des secrets et procédures d'export sécurisées.","projects.security.proof":"Objectif : environnements auditables, accès privilégiés contrôlés et meilleure traçabilité opérationnelle","projects.tenders.role":"Mon rôle — Product Engineering · Backend · APIs · Automation","projects.tenders.desc":"Plateforme SaaS de veille sur les appels d'offres publics, avec préférences utilisateurs, authentification, traitement automatisé des données et notifications ciblées selon les secteurs et marchés suivis.","projects.digikiosques.role":"Mon rôle — Architecture de solutions · C4 · Flux de données","projects.digikiosques.desc":"Architecture IT pour un réseau de kiosques numériques solaires desservant des petits exploitants agricoles en zone rurale. Modélisation C4, architecture edge/pays/central, flux de données et processus métier.","projects.grievance.title":"Système de gestion des plaintes","projects.grievance.role":"Mon rôle — Déploiement · Backend · Tests · Livraison terrain","projects.grievance.desc":"Déploiement d'un système de gestion des plaintes dans les communes de Matéri et Banikoara, avec fonctionnement en français et langues locales, plans de test, validation et accompagnement opérationnel.","tag.telephony":"Téléphonie","tag.aiAgent":"Agent IA","tag.multilingual":"Multilingue","tag.fieldDeployment":"Déploiement terrain","skills.heading":"Compétences techniques","skills.sectionNum":"02 / STACK & PLATEFORME","skills.monitoring":"Monitoring & gestion des secrets","skills.genai":"IA générative","skills.aiAgents":"Agents IA","skills.queues":"Queues & traitements asynchrones","skills.voice":"Voix & Télécom","skills.data":"Données","skills.messageQueues":"Files de messages","skills.async":"Traitement asynchrone","experience.heading":"Expérience","experience.sectionNum":"03 / PARCOURS","experience.presentDate":"2023 — présent","experience.ourvoice.role":"Développeur Full Stack & Architecte de solutions","experience.ourvoice.desc":"Architecture, développement et exploitation de plateformes cloud d'IA et de communication. APIs REST et microservices Python/FastAPI et Node.js/Express, Docker/CI-CD, webhooks, queues et intégration IA générative (LLM, RAG, ASR, TTS). Encadrement d'une équipe de 5 ingénieurs.","experience.tic.role":"Responsable informatique","experience.tic.desc":"Encadrement d'une équipe de 7 développeurs, adoption Agile/Scrum (+25% de productivité). Déploiement et administration de l'infrastructure AWS (EC2, S3, Lambda, RDS, IAM, VPC, CloudWatch).","experience.fullstack":"Développeur Full Stack","experience.gversion.org":"GVersion Ltd · Royaume-Uni (à distance)","experience.gversion.desc":"APIs REST et services backend pour une plateforme de gestion de clés immobilières. Conception et optimisation d'un tableau de bord Vue.js.","experience.nautilus.desc":"Développement de plateformes web et mobiles B2B avec PHP et Laravel. Conception et maintenance d'APIs REST.","credentials.education":"Formation","credentials.degree":"Diplôme d'ingénieur en informatique — École Polytechnique d'Abomey-Calavi, Bénin (2014–2016)","credentials.certification":"Certification","credentials.kcna":"Kubernetes and Cloud Native Associate (KCNA) — The Linux Foundation, août 2025","credentials.languages":"Langues","credentials.languagesValue":"Français — C1 / courant · Anglais — B2 / professionnel","contact.heading":"Discutons de votre projet.","contact.lede":"Basé à Cotonou, Bénin — ouvert aux opportunités et à la relocalisation en Afrique francophone, notamment à Abidjan.","contact.cv":"Télécharger mon CV","footer.role":"PROSPER DOKO — INGÉNIEUR DEVOPS & IA","footer.location":"COTONOU, BÉNIN","status.dataPlatform":"Data platform","projects.cashew.role":"Mon rôle — Full Stack · Data Visualization · Mobile","projects.cashew.desc":"Contribution à une plateforme de market intelligence dédiée à la filière cajou : ajout et optimisation de dashboards de production et de commerce, visualisations responsives avec ApexCharts, amélioration des performances de chargement et accompagnement de la distribution mobile sur iOS/TestFlight et Android/Play Store.","other.heading":"AUTRES RÉALISATIONS"},"en":{"meta.title":"Prosper Doko — DevOps & AI Engineer | Cloud, Backend & GenAI","meta.description":"Technical portfolio of Prosper Doko, DevOps & AI Engineer: AWS, CI/CD, Python, APIs, microservices, Generative AI and Voice AI.","nav.projects":"Projects","nav.skills":"Skills","nav.experience":"Experience","nav.contact":"Contact","hero.eyebrow":"DevOps & AI Engineer — Cloud · Backend · GenAI","hero.title":"From <em>cloud infrastructure</em><br>to <em>AI agents</em>.","hero.lede":"I design, deploy, and operate cloud systems and production AI applications — AWS infrastructure, CI/CD, APIs, microservices, and intelligent agents. My Voice AI and telecom expertise extends this foundation to real-time systems accessible by phone.","hero.projectsCta":"View projects →","hero.cvCta":"Download my CV ↓","hero.relocation":"Open to relocation to Abidjan, Côte d’Ivoire","console.prompt":"prosper@portfolio:~$","console.whoami":"DevOps & AI Engineer","console.focus1":"Cloud infrastructure","console.focus2":"CI/CD & automation","console.focus3":"Backend & APIs","console.focus4":"Generative AI","console.focus5":"Voice AI","console.stack1":"AWS · Linux · Docker","console.stack2":"Kubernetes · Python","console.stack3":"FastAPI · Node.js","console.stack4":"GitHub Actions · Redis","console.ai1":"OpenAI · Claude","console.ai2":"Gemini · Grok","diagram.trace":"production trace — voice ai pipeline","diagram.live":"live","diagram.aria":"Diagram of a phone call routed to an AI voice agent, showing SIP signaling, RTP audio, AI processing, and the generated response.","diagram.phone":"PHONE","diagram.server":"OURVOICE SERVER","diagram.agent":"AI AGENT","diagram.invite":"INVITE — incoming call","diagram.rtpIn":"RTP — audio stream","diagram.context":"transcription + context","diagram.response":"generated response (TTS)","diagram.rtpOut":"RTP — voice response","stats.experience":"YEARS OF EXPERIENCE<br>SOFTWARE &amp; DEVOPS","stats.deployment":"DEPLOYMENT TIME<br>AFTER CI/CD AUTOMATION","stats.prizeNum":"1<span>st</span> PRIZE","projects.heading":"Selected work","projects.sectionNum":"01 / TECHNICAL PROOF","projects.view":"View project ↗","status.production":"Production","status.firstPrize":"1st prize","status.architecture":"Architecture","status.deployed":"Deployed","projects.ourvoice.role":"My role — Architecture · Backend · DevOps · AI Integration","projects.ourvoice.desc":"CPaaS and Voice AI platform combining telephony, SMS, IVR, APIs, microservices, and AI voice agents. I work across architecture, backend services, deployment pipelines, real-time integrations, and production operations.","projects.ourvoice.proof":"Automated CI/CD · webhooks & queues · LLM + STT + TTS · production Linux services","projects.callbot.role":"My role — Product Design · Architecture · Voice AI · Deployment","projects.callbot.desc":"Multilingual AI voice agent accessible through a regular phone call, enabling citizens to access public information by voice — without a smartphone or web interface. Winner of the Digital Democracy Initiative Hack4Democracy 2025.","projects.security.title":"Production Infrastructure & Security","projects.security.role":"My role — Hardening · Access · Audit · Secrets · Monitoring","projects.security.desc":"Prepared production servers for an external audit through Linux hardening, access control, audit logging, network restrictions, secrets management, and secure export procedures.","projects.security.proof":"Goal: auditable environments, controlled privileged access, and stronger operational traceability","projects.tenders.role":"My role — Product Engineering · Backend · APIs · Automation","projects.tenders.desc":"SaaS platform for monitoring public tenders, with user preferences, authentication, automated data processing, and targeted notifications based on industries and markets of interest.","projects.digikiosques.role":"My role — Solution Architecture · C4 · Data Flows","projects.digikiosques.desc":"IT architecture for a network of solar-powered digital kiosks serving smallholder farmers in rural areas. C4 modeling, edge/country/central architecture, data flows, and business processes.","projects.grievance.title":"Grievance Management System","projects.grievance.role":"My role — Deployment · Backend · Testing · Field Delivery","projects.grievance.desc":"Deployment of a grievance management system in the municipalities of Matéri and Banikoara, operating in French and local languages, with test plans, validation, and operational rollout support.","tag.telephony":"Telephony","tag.aiAgent":"AI Agent","tag.multilingual":"Multilingual","tag.fieldDeployment":"Field deployment","skills.heading":"Technical skills","skills.sectionNum":"02 / STACK & PLATFORM","skills.monitoring":"Monitoring & secrets management","skills.genai":"Generative AI","skills.aiAgents":"AI Agents","skills.queues":"Queues & asynchronous processing","skills.voice":"Voice & Telecom","skills.data":"Data","skills.messageQueues":"Message queues","skills.async":"Asynchronous processing","experience.heading":"Experience","experience.sectionNum":"03 / CAREER","experience.presentDate":"2023 — Present","experience.ourvoice.role":"Full Stack Developer & Solutions Architect","experience.ourvoice.desc":"Architecture, development, and operations for cloud-based AI and communications platforms. REST APIs and microservices with Python/FastAPI and Node.js/Express, Docker/CI-CD, webhooks, queues, and Generative AI integration (LLM, RAG, ASR, TTS). Led a five-person engineering team.","experience.tic.role":"IT Manager","experience.tic.desc":"Managed a seven-person development team and adopted Agile/Scrum practices (+25% productivity). Deployed and administered AWS infrastructure including EC2, S3, Lambda, RDS, IAM, VPC, and CloudWatch.","experience.fullstack":"Full Stack Developer","experience.gversion.org":"GVersion Ltd · United Kingdom (Remote)","experience.gversion.desc":"Built REST APIs and backend services for a residential property key-management platform. Designed and optimized a Vue.js dashboard.","experience.nautilus.desc":"Developed B2B web and mobile platforms with PHP and Laravel. Designed and maintained REST APIs.","credentials.education":"Education","credentials.degree":"Engineering Degree in Computer Science — Polytechnic School of Abomey-Calavi, Benin (2014–2016)","credentials.certification":"Certification","credentials.kcna":"Kubernetes and Cloud Native Associate (KCNA) — The Linux Foundation, August 2025","credentials.languages":"Languages","credentials.languagesValue":"French — C1 / fluent · English — B2 / professional working proficiency","contact.heading":"Let’s discuss what you are building.","contact.lede":"Based in Cotonou, Benin — open to opportunities and relocation across Francophone Africa, including Abidjan.","contact.cv":"Download my CV","footer.role":"PROSPER DOKO — DEVOPS & AI ENGINEER","footer.location":"COTONOU, BENIN","status.dataPlatform":"Data platform","projects.cashew.role":"My role — Full Stack · Data Visualization · Mobile","projects.cashew.desc":"Contributed to a market-intelligence platform for the cashew sector by adding and optimizing production and trade dashboards, building responsive ApexCharts visualizations, improving data-loading performance, and supporting mobile distribution through iOS/TestFlight and Android/Play Store.","other.heading":"OTHER WORK"}};
+  const supportedLanguages = ['fr', 'en'];
+  const cvByLanguage = {
+    fr: 'assets/Prosper_Doko_DevOps_AI_Engineer_CV_FR.pdf',
+    en: 'assets/Prosper_Doko_DevOps_AI_Engineer_CV_EN.pdf'
+  };
+
+  function browserLanguage() {
+    const candidates = Array.isArray(navigator.languages) && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language || 'en'];
+    for (const raw of candidates) {
+      const lang = String(raw).toLowerCase().split('-')[0];
+      if (supportedLanguages.includes(lang)) return lang;
+    }
+    return 'en';
+  }
+
+  function translate(lang, persist = false) {
+    if (!supportedLanguages.includes(lang)) lang = 'en';
+    const dict = translations[lang];
+
+    document.documentElement.lang = lang;
+    document.title = dict['meta.title'];
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) metaDescription.setAttribute('content', dict['meta.description']);
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.dataset.i18nHtml;
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const key = el.dataset.i18nAria;
+      if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
+    });
+
+    document.querySelectorAll('[data-cv-download]').forEach(el => {
+      el.setAttribute('href', cvByLanguage[lang]);
+      el.setAttribute('download', cvByLanguage[lang].split('/').pop());
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      const active = btn.dataset.lang === lang;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+
+    if (persist) localStorage.setItem('portfolioLanguage', lang);
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => translate(btn.dataset.lang, true));
+  });
+
+  const saved = localStorage.getItem('portfolioLanguage');
+  translate(supportedLanguages.includes(saved) ? saved : browserLanguage());
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('animate, animateMotion').forEach(function(el){
+      el.setAttribute('dur', '0s');
+      el.setAttribute('repeatCount', '1');
+    });
+  }
+</script>
+
+</body>
+</html>
